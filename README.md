@@ -2,6 +2,8 @@
 
 A simple web application for converting time ranges across different time zones.
 
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/rschroll/vibezone?quickstart=1)
+
 ## Features
 
 - Select a source timezone and datetime range
