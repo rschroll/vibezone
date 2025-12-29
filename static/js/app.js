@@ -1,22 +1,29 @@
 window.onload = function() {
-    // Set from timezone to user's current timezone
-    const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    document.getElementById('from_timezone').value = userTZ;
+    // Set from timezone to user's current timezone if not already set
+    const fromInput = document.getElementById('from_timezone');
+    if (fromInput.value === '') {
+        const userTZ = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        fromInput.value = userTZ;
+    }
 
-    // Set start and end datetime to next top of the hour and one hour later
-    const now = new Date();
-    const nextHour = new Date(now);
-    nextHour.setHours(now.getHours() + 1, 0, 0, 0);
-    const hourAfter = new Date(nextHour);
-    hourAfter.setHours(nextHour.getHours() + 1);
+    // Set start and end datetime to next top of the hour and one hour later if not already set
+    const startInput = document.getElementById('start_datetime');
+    const endInput = document.getElementById('end_datetime');
+    if (startInput.value === '' && endInput.value === '') {
+        const now = new Date();
+        const nextHour = new Date(now);
+        nextHour.setHours(now.getHours() + 1, 0, 0, 0);
+        const hourAfter = new Date(nextHour);
+        hourAfter.setHours(nextHour.getHours() + 1);
 
-    // Format for datetime-local (YYYY-MM-DDTHH:MM)
-    const formatDateTime = (date) => {
-        return date.toISOString().slice(0, 16);
-    };
+        // Format for datetime-local (YYYY-MM-DDTHH:MM)
+        const formatDateTime = (date) => {
+            return date.toISOString().slice(0, 16);
+        };
 
-    document.getElementById('start_datetime').value = formatDateTime(nextHour);
-    document.getElementById('end_datetime').value = formatDateTime(hourAfter);
+        startInput.value = formatDateTime(nextHour);
+        endInput.value = formatDateTime(hourAfter);
+    }
 
     // Handle adding timezone inputs
     const container = document.getElementById('to_timezones_container');

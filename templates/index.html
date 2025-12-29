@@ -18,7 +18,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="from_timezone" class="form-label">From Timezone</label>
-                    <input type="text" class="form-control" id="from_timezone" name="from_timezone" list="timezones" required>
+                    <input type="text" class="form-control" id="from_timezone" name="from_timezone" list="timezones" value="{{ from_tz or '' }}" required>
                     <datalist id="timezones">
                         {% for tz in common_timezones %}
                         <option value="{{ tz }}">
@@ -30,20 +30,29 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="start_datetime" class="form-label">Start Date & Time</label>
-                    <input type="datetime-local" class="form-control" id="start_datetime" name="start_datetime" required>
+                    <input type="datetime-local" class="form-control" id="start_datetime" name="start_datetime" value="{{ start or '' }}" required>
                 </div>
                 <div class="col-md-6">
                     <label for="end_datetime" class="form-label">End Date & Time</label>
-                    <input type="datetime-local" class="form-control" id="end_datetime" name="end_datetime" required>
+                    <input type="datetime-local" class="form-control" id="end_datetime" name="end_datetime" value="{{ end or '' }}" required>
                 </div>
             </div>
 
             <div class="mb-3" id="to_timezones_container">
                 <label class="form-label">To Timezones</label>
+                {% if to_tzs %}
+                {% for tz in to_tzs %}
+                <div class="input-group mb-2 tz-input-group">
+                    <input type="text" class="form-control" name="to_timezones" list="timezones" value="{{ tz }}" required>
+                    <button class="btn btn-outline-secondary remove-tz" type="button">Remove</button>
+                </div>
+                {% endfor %}
+                {% else %}
                 <div class="input-group mb-2 tz-input-group">
                     <input type="text" class="form-control" name="to_timezones" list="timezones" required>
                     <button class="btn btn-outline-secondary remove-tz" type="button" style="display:none;">Remove</button>
                 </div>
+                {% endif %}
                 <button type="button" class="btn btn-secondary" id="add_tz">Add another timezone</button>
             </div>
 
