@@ -38,14 +38,13 @@
                 </div>
             </div>
 
-            <div class="mb-3">
-                <label for="to_timezones" class="form-label">To Timezones (select multiple)</label>
-                <input type="text" class="form-control mb-2" id="tz_search" placeholder="Search timezones">
-                <select class="form-select" id="to_timezones" name="to_timezones" multiple required style="height: 200px;">
-                    {% for tz in common_timezones %}
-                    <option value="{{ tz }}">{{ tz }}</option>
-                    {% endfor %}
-                </select>
+            <div class="mb-3" id="to_timezones_container">
+                <label class="form-label">To Timezones</label>
+                <div class="input-group mb-2 tz-input-group">
+                    <input type="text" class="form-control" name="to_timezones" list="timezones" required>
+                    <button class="btn btn-outline-secondary remove-tz" type="button" style="display:none;">Remove</button>
+                </div>
+                <button type="button" class="btn btn-secondary" id="add_tz">Add another timezone</button>
             </div>
 
             <button type="submit" class="btn btn-primary">Convert</button>
